@@ -1,26 +1,28 @@
 # -*- coding: utf-8 -*-
-# 0) Avantage numéro un : la communauté !
-#    Bouillon de culture pour les best practices : Agile, testing...
-#    Beaucoup de bibliothèques et frameworks, dont Rails est le plus célèbre
+# http://github.com/abelards/Ruby-par-l-exemple
 
+# 0) Avantage numéro un : la communauté !
+# Bouillon de culture pour les best practices :
+# Agile, testing...  Beaucoup de bibliothèques
+# et frameworks, dont Rails est le plus célèbre
 
 # 1) oui, c'est un langage de script
+n = 17
 str = "bonjour"
-num = 7
 
 # 2) syntaxe agréable qui se fait oublier.
 #    Tout ce que le langage peut deviner est optionnel (points virgules, parenthèses...)
 
-"#{str}, #{num} langages ce soir"
-# => "bonjour, 7 langages ce soir"
+"#{str}, apprenons Ruby en #{n} points"
+# => "bonjour, apprenons Ruby en 17 points"
 
 # 3) sucre syntaxique, operateurs, post-conditions...
-if num > 1 # if et end classiques
-  num += 3 # opérateur +=
+if n > 1 # if et end classiques
+  n += 3 # opérateur +=
 end
-num
+n
 
-# ||= est l'opérateur qui assigne une valeur si la variable est vide
+# ||= est l'opérateur qui assigne une valeur si la variable est nil ou false
 a ||= 4
 a
 a ||= 8
@@ -29,11 +31,11 @@ a
 # si le code tient en une ligne on peut utiliser les post-conditions
 # ça ressemble à un langage plus naturel, proche de l'anglais
 # si vous ne savez pas coder en Ruby, vous saurez vite lire du Ruby !
-puts "TIM" if num != 3
-puts "TOW" if not num == 3
-puts "TDI" unless num == 1
+puts "TIM" if n != 3
+puts "TOW" if not n == 3
+puts "TDI" unless n == 1
 
-puts "I #{num == 3 ? 'love' : 'hate' } ternary operator"
+puts "I #{n == 3 ? 'love' : 'hate' } ternary operator"
 # => "I love ternary operator"
 
 
@@ -41,8 +43,7 @@ puts "I #{num == 3 ? 'love' : 'hate' } ternary operator"
 str.capitalize # les chaînes et entiers ont des méthodes
 "Ho ! " * 3 # et des opérateurs surchargés
 
-num.times do # la syntaxe de bloc (scope / fonction anonyme / ...) est en accolades ou do/end
-end
+3.times do # la syntaxe de bloc (scope / fonction anonyme / ...) est en accolades ou do/end
   puts "Ho !"
 end
 
@@ -63,14 +64,15 @@ hash = {"a" => 1, "b" => 2} # hash : tableau associatif
 lang = { # clés de tout type / valeurs également
   :script => scripts,
   :c => classics,
-  'JVM' => ['Scala', 'Clojure', '...'],
-  ['fonctionnels'] => funcs
+  'fonctionnels' => funcs,
+  ['JVM'] => ['Scala', 'Clojure', '...']
+
 }
 
 lang[:script]
 lang[:js] = 'js'
-lang[:scripts] << 'js'
-lang[:classic] << 'js'
+lang[:script] << 'js'
+lang['fonctionnels'].push('js')
 lang
 
 
@@ -87,6 +89,12 @@ lang.values.flatten.uniq.sort.join(', ')
 
 # je veux ne ressortir que les éléments contenant la lettre C
 classics.select{|x| x.include? "C" }
+# => ["C", "C++", "C#"]
+
+# ou plus rapide encore, et plus intuitif pour les utilisateurs Unix
+# grep est un outil unix de recherche de texte
+# les séparateurs // indiquent une expression régulière (RegExp)
+classics.grep(/c/)
 # => ["C", "C++", "C#"]
 
 
@@ -117,7 +125,7 @@ a1.zip(a2) {|x,y| puts "#{x} a #{y} ans" }
 
 
 # 8) definition de fonction
-def is_prime(i)
+def is_prime?(i)
   2.upto(Math.sqrt(i).to_i) {|j|
     return false if i % j == 0
   }
@@ -125,15 +133,15 @@ def is_prime(i)
 end
 
 # 9) parametres optionnels
-def aff_prime(x=1, y=42)
+def some_primes(x=1, y=42)
   x.upto(y) {|k|
-    next unless is_prime(k)
+    next unless is_prime?(k)
     puts "#{k} is prime"
   }
 end
 
 # et hop, la même en une seule fonction
-def premiers_de_x_a_y(x,y)
+def primes_in_a_range(x,y)
   (x..y).select {|i|
     !(2..(Math.sqrt(i).to_i)).any? {|j|
       i % j == 0
@@ -147,15 +155,19 @@ def primes(x,y)
 end
 
 
-aff_prime
-aff_prime(127, 150)
-primes
+some_primes
+primes_in_a_range(127, 150)
+primes(256,512)
 
 # 10) classes et accesseurs
-class Point
+class PointClass
   attr_accessor :x
   attr_accessor :y
 end
+
+# 10b) Struct, pour ce genre de besoins simples
+# Ruby dispose d'une classe struct avec tout un tas d'autre boni
+Point = Struct.new(:x, :y)
 
 p = Point.new
 p.x = 3
@@ -174,6 +186,8 @@ class Carre
   end
 
 # 12) la philosophie Ruby encourage les getters et setters simples
+# C'est le genre de code que vous n'avez pas besoin de faire
+# si c'étaient des chanps dans une Struct
   def x
     @point.x
   end
@@ -205,24 +219,17 @@ end
 String.ancestors
 
 
-
 # 14) parametres
+# notez au passage que je "réouvre" ma classe Point (qui est une Struct)
 class Point
-  def initialize(x, y)
-    @x = x
-    @y = y
-  end
 
-  def move(*args)
-    if args.first.respond_to?(:x)
-      @x += args.first.x; @y += args.first.y
-    elsif args.size > 1
-      @x += x; @y += y
-    end
+  def move(x, y)
+    if @x.nil? then @x = x else @x += x end
+    if @y.nil? then @y = y else @y += y end
   end
 end
 
-p.move(p)
+p.move(2,2)
 p
 
 r = Rectangle.new(Point.new(-2, 4))
@@ -244,7 +251,7 @@ class Carre
   end
 
   def to_s
-    "Carre : position (#{x}, #{y}), cote #{@w} "
+    "Carre : position (#{@x}, #{@y}), cote #{@w} "
   end
 end
 
@@ -258,11 +265,23 @@ end
 
 "#{c}#{r}"
 
+class Point
+  def move_to(*args)
+    if args.first.respond_to?(:x)
+      @x = args.first.x; @y = args.first.y
+    elsif args.size > 1
+      @x = x; @y = y
+    end
+  end
+end
+
+p.move_to(1,2)
+p.move_to(Point.new(4,7))
 
 # 17) integration Java sans probleme avec JRuby
 
 
-# ruby 1.9
+# ruby 1.9 et 2.0
 
 # new block syntax
 # blk = ->(key, value) {puts key, value}

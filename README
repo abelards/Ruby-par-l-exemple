@@ -4,21 +4,23 @@ Objectif : donner envie d'en savoir plus en 5mn.
 Communauté Ruby et Rails Paris #parisrb : http://meetup.rubyparis.org
 
 Pour se lancer dans Ruby :
+
  Tester et pratiquer dans votre navigateur : http://rubymonk.com/
  Accompagnement dans l'apprentissage : http://rubykoans.com/
+ Pratiquer sur des problèmes : http://rubeque.herokuapp.com/problems
 
-Pour se lancer dans Rails :
+
+Pour se lancer dans Rails : http://jeveuxapprendreruby.fr
+
  Les guides Ruby on Rails : http://guides.rubyonrails.org/
  Traduction en Français : https://github.com/railsfrance/docrails
  Rails for Zombies : http://railsforzombies.org/
 
-Veille régulière :
- http://railscasts.com/
- http://asciicasts.com/
 
-Veille régulière francophone :
- http://www.bonjourgem.com/
- http://rubylive.fr/
+Veille régulière : http://rubylive.fr
+
+ http://railscasts.com
+ http://asciicasts.com
 
 
 Ruby et les autres langages :
