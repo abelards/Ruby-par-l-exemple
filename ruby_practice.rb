@@ -49,9 +49,13 @@ end
 
 
 # 5) structures simples et efficaces
-
 classics = ["Java", "C"] # tableau
 classics << "Lisp" # ajout
+
+# accès par index
+classics[1] # -> renvoie 'C'
+classics[3] = 'Prolog'
+
 classics += ["C++", "C#"] # addition de tableaux
 classics.sort.join(", ")
 # => "C, C#, C++, Java, Lisp"
@@ -59,7 +63,11 @@ classics.sort.join(", ")
 scripts = ['ruby', 'python', 'perl', 'sh']
 funcs = "Caml F# Haskell".split # un tableau à partir d'une string
 
+
 hash = {"a" => 1, "b" => 2} # hash : tableau associatif
+# accès clés-valeurs :
+hash['a'] # -> renvoie 1
+hash['c'] = 3
 
 lang = { # clés de tout type / valeurs également
   :script => scripts,

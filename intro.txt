@@ -1,0 +1,42 @@
+RUBY
+
+Philosophie
+- L'homme est le Maitre. La machine est l'esclave.
+- POLS : Principle of Least Surprise
+
+Syntaxe
+- Code court, lisible, facile à écrire
+- Pas de déclaration des variables
+- Parenthèses et points virgules optionnels
+
+- Simple à prendre en main venant de :
+  Shell, PERL, Python, SmallTalk, Lisp, C, C++, Java...
+
+Conventions
+- CONSTANTE (ou Constante)
+- Classe
+- @@class_var, @property
+- methode_question? methode_in_place!
+- :symbole
+- "chaine interpretee #{variable}"
+- 'chaine sans interpretation #{variable}'
+- def func(param_optionnel = default_value)
+- opérateurs
+- modifieurs (condition postfixe)
+
+POO
+- Tout est objet. Classe de base : Object
+- Héritage simple
+  class MyString < String
+- Modification dynamique du code
+  class String
+    def is_long? # j'ajoute une fonctionnalité
+      self.length > 8
+    end
+  end
+
+  s = "longue" # je n'ai pas envie de toucher à la classe
+  def s.is_long?
+    true
+  end
+
