@@ -3,25 +3,26 @@ Objectif : donner envie d'en savoir plus en 5mn.
 
 Communauté Ruby et Rails Paris #parisrb : http://meetup.rubyparis.org
 
-Pour se lancer dans Ruby :
+RailsGirls est un excellent endroit pour commencer :  
+  installation, tutorial, explications et liens vers d'autres ressources...
+* [EN] http://guides.railsgirls.com/
+* [FR] http://humancoders.github.io/railspremierspas/
 
- Tester et pratiquer dans votre navigateur : http://rubymonk.com/
- Accompagnement dans l'apprentissage : http://rubykoans.com/
- Pratiquer sur des problèmes : http://rubeque.herokuapp.com/problems
+Pour se lancer dans Ruby :
+* Tester et pratiquer dans votre navigateur : http://rubymonk.com/
+* Accompagnement dans l'apprentissage : http://rubykoans.com/
+* Pratiquer sur des problèmes : http://rubeque.herokuapp.com/problems
 
 
 Pour se lancer dans Rails : http://jeveuxapprendreruby.fr
+* Les guides Ruby on Rails : http://guides.rubyonrails.org/
+* Traduction en Français : https://github.com/railsfrance/docrails
+* Rails for Zombies : http://railsforzombies.org/
 
- Les guides Ruby on Rails : http://guides.rubyonrails.org/
- Traduction en Français : https://github.com/railsfrance/docrails
- Rails for Zombies : http://railsforzombies.org/
 
-
-Veille régulière : http://rubylive.fr
-
- http://railscasts.com
- http://asciicasts.com
-
+Veille régulière :
+* http://railscasts.com
+* http://asciicasts.com
 
 Ruby et les autres langages :
  JS : http://agentcooper.github.com/js-ruby-comparison/
