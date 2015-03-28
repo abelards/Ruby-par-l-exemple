@@ -218,6 +218,23 @@ end
 c = Carre.new(p)
 c
 
+
+# 12.5) Utiliser des patterns comme la délégation devient facile en Ruby !
+require 'delegate'
+class SimpleCarre < SimpleDelegator
+  def initialize(point, w=2)
+    super(point)
+    @w = w
+  end
+  alias :point :__getobj__
+end
+
+sc = SimpleCarre.new(p)
+sc.x
+sc.y
+sc.w
+sc
+
 # 13) l'heritage est simple
 class Rectangle < Carre
   attr_accessor :h
