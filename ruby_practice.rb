@@ -208,7 +208,7 @@ class Carre
     @point.x = x
   end
 
-  def y(y)
+  def y=(y)
     @point.y = y
   end
 
