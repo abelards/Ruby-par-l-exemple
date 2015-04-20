@@ -38,7 +38,6 @@ puts "TDI" unless n == 1
 puts "I #{n == 3 ? 'love' : 'hate' } ternary operator"
 # => "I love ternary operator"
 
-
 # 4) tout est objet
 str.capitalize # les chaînes et entiers ont des méthodes
 "Ho ! " * 3 # et des opérateurs surchargés
@@ -46,7 +45,6 @@ str.capitalize # les chaînes et entiers ont des méthodes
 3.times do # la syntaxe de bloc (scope / fonction anonyme / ...) est en accolades ou do/end
   puts "Ho !"
 end
-
 
 # 5) structures simples et efficaces
 classics = ["Java", "C"] # tableau
@@ -83,7 +81,6 @@ lang[:script] << 'js'
 lang['fonctionnels'].push('js')
 lang
 
-
 # 6) API efficace, saveur fonctionnelle
 # je veux tous mes langages : toutes les valeurs
 lang.values
@@ -105,8 +102,6 @@ classics.select{|x| x.include? "C" }
 classics.grep(/c/)
 # => ["C", "C++", "C#"]
 
-
-
 # 7) programmation fonctionnelle avec des blocks
 1.upto(4) {|i| puts "#{i}e#{i == 1 ? 'r' : 'me' }" }
 # 1er
@@ -121,7 +116,6 @@ pows = "1 2 4 8 16 32 64".split.map{|x| x.to_i}
 pows.inject(0) {|x, sum| sum + x }
 # => 127
 
-
 # zip permet d'itérer sur plusieurs énumérables en même temps :
 # elle créé un tableau de paires [élément i du tableau 1, élément i du tableau 2]
 a1 = ['Pierre', 'Paul', 'Jacques']
@@ -130,7 +124,6 @@ a1.zip(a2) {|x,y| puts "#{x} a #{y} ans" }
 # Pierre a 27 ans
 # Paul a 32 ans
 # Jacques a 45 ans
-
 
 # 8) definition de fonction
 def is_prime?(i)
@@ -161,7 +154,6 @@ end
 def primes(x,y)
   (x..y).select {|i| !(2..(Math.sqrt(i).to_i)).any? {|j| i % j == 0 } }
 end
-
 
 some_primes
 primes_in_a_range(127, 150)
@@ -211,14 +203,12 @@ class Carre
   def y=(y)
     @point.y = y
   end
-
-
 end
 
 c = Carre.new(p)
 c
 
-# 13) l'heritage est simple
+# 13) l'héritage est simple
 class Rectangle < Carre
   attr_accessor :h
 end
@@ -226,8 +216,7 @@ end
 # mais les modules peuvent simuler un excellent heritage multiple
 String.ancestors
 
-
-# 14) parametres
+# 14) paramètres
 # notez au passage que je "réouvre" ma classe Point (qui est une Struct)
 class Point
 
@@ -244,7 +233,7 @@ r = Rectangle.new(Point.new(-2, 4))
 r.h = 5
 r
 
-# 15) 'réouverture' de classes : on peut aussi modifier des instances
+# 15) "réouverture" de classes : on peut aussi modifier des instances
 class Rectangle
   def area
     @w.to_i * @h.to_i
@@ -286,8 +275,7 @@ end
 p.move_to(1,2)
 p.move_to(Point.new(4,7))
 
-# 17) integration Java sans probleme avec JRuby
-
+# 17) intégration Java sans probleme avec JRuby
 
 # ruby 1.9 et 2.0
 
@@ -299,3 +287,14 @@ p.move_to(Point.new(4,7))
 # blk = ->(first, *middle, last) {puts last}
 # blk.(1, 2, 3)
 
+# A) Bonus 1 : les chaînes de caractères et l'interpolation
+nom = 'Sylvain'
+a = 'Bonjour #{nom}\nÇa va ?' # pas d'interpolation => "Bonjour \#{nom}\\nÇa va ?"
+b = "Bonjour #{nom}\nÇa va ?" # avec interpolation  => "Bonjour Sylvain
+#Ça va ?"
+
+a = %q[Chaîne avec des 'quotes' et "guillemets" sans interpolation #{nom}]
+b = %Q[Chaîne avec des 'quotes' et "guillemets" avec interpolation #{nom}]
+
+'a' == "a" == %Q{a} == %Q(a) == %Q|a| # ça marche avec beaucoup de caractères
+# Ruby a aussi des HEREDOCS mais ça sort un peu du périmètre d'un intro.
